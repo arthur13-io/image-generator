@@ -1,12 +1,25 @@
-import * as dotenv from 'dotenv';
+import * as dotenv from 'dotenv'; //get access to environment variables
 dotenv.config();
-import { Configuration, OpenAIApi } from 'openai'; 
+import OpenAI from 'openai'; 
 
-const configuration = new Configuration({ apiKey: process.env.OPPENAI }); // create a configuration object
-const openai = new OpenAIApi(configuration); // create the API client
-
-import express from 'express'; 
+const openAi = new OpenAI({apiKey: process.env.new_openAI}) // create a configuration object; new way of doing things
+import express from 'express';
 import cors from 'cors'; 
 
 const app = express(); // create express app
 app.use(cors()); // enable cors
+app.use(express.json()); // enable json parsing
+
+//creating the endpoint
+app.post('/dream', async (req, res) => {
+    const prompt = req.body.prompt //get the prompt from the request
+    const response = await openAi.images.generate({
+        prompt,
+        n: 1,
+        size: '1024x1024',
+    });
+    console.log("response", response);
+    const image = response.data[0].url; //get the image url from the response
+    res.send({image}); //send the image url as a response
+});
+app.listen(8080, () => console.log('Make some cool art on http://localhost:8080')); //start express server on port 8080
