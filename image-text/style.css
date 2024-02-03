@@ -1,14 +1,104 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Rubik+Glitch&family=Rubik+Microbe&display=swap');
+body {
+  background-color: #0b0b0e;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  margin-top: 50px;
+}
+
+main {
+ display: grid;
+ place-items: center;
+}
+
+h1 {
+  font-family: 'Rubik Microbe', cursive;
   font-weight: 400;
+  font-size: 5rem;
+}
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+#result {
+  aspect-ratio: 1/1;
+  max-width: 512px;
+  width: 100%;
+  background: #3a3a43;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 512px;
+  margin-top: 2rem;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  margin: 10px 0;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  outline: none;
+}
+
+button {
+  width: 100%;
+  height: 50px;
+  background-color: #1b1b1e;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 50px;
+}
+
+button:hover {
+  background-color: #2b2b2e;
+}
+
+.hidden {
+  display: none;
+}
+
+
+.spinner {
+  animation: spin 1s linear infinite;
+  display: inline-block;
+}
+ .skeleton {
+  aspect-ratio: 1/1;
+  max-width: 512px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #3a3a43;
+  z-index: 1;
+  overflow: hidden;
+  animation: skeleton 1s infinite linear;
+}
+@keyframes skeleton {
+  0% {
+    background: #3a3a43;
+  }
+  50% {
+    background: #4a4a53;
+  }
+  100% {
+    background: #3a3a43;
+  }
+}
+
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
 }

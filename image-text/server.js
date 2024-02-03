@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv'; //get access to environment variables
 dotenv.config();
 import OpenAI from 'openai'; 
 
-const openAi = new OpenAI({apiKey: process.env.new_openAI}) // create a configuration object; new way of doing things
+const openAi = new OpenAI({apiKey: process.env.openAI}) // create a configuration object; new way of doing things
 import express from 'express';
 import cors from 'cors'; 
 
