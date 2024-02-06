@@ -1,4 +1,4 @@
-// import './style.css'
+import './style.css'
 
 const form = document.querySelector('form');
 
@@ -15,11 +15,19 @@ form.addEventListener('submit', async (e) => {
         prompt: data.get('prompt')
       }),
     })
-    const { image } = await response.json();
-    console.log(image);
-    console.log(response);
-    const result = document.querySelector('#result')
-    result.innerHTML = `<img src ="${image}" width="512"/>`
+    if(response.ok){
+      const { image } = await response.json();
+      console.log(image);
+      console.log(response);
+      const result = document.querySelector('#result')
+      result.innerHTML = `<img src ="${image}" width="512"/>`
+    }
+    else{
+      const err = await response.text();
+      alert(err);
+      console.log(err);
+
+    }
     hideSpinner();
 });
 

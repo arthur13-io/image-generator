@@ -12,14 +12,18 @@ app.use(express.json()); // enable json parsing
 
 //creating the endpoint
 app.post('/dream', async (req, res) => {
-    const prompt = req.body.prompt //get the prompt from the request
-    const response = await openAi.images.generate({
-        prompt,
-        n: 1,
-        size: '1024x1024',
-    });
-    console.log("response", response);
-    const image = response.data[0].url; //get the image url from the response
-    res.send({image}); //send the image url as a response
-});
-app.listen(8080, () => console.log('Make some cool art on http://localhost:8080')); //start express server on port 8080
+    try {
+        const prompt = req.body.prompt //get the prompt from the request
+        const response = await openAi.images.generate({
+            prompt,
+            n: 1,
+            size: '1024x1024',
+        });
+        console.log("response", response);
+        const image = response.data[0].url; //get the image url from the response
+        res.send({image}); //send the image url as a response
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error?.response.data.error.message || 'Something interesting happened');
+    }
+app.listen(8080, () => console.log('Make some cool art on http://localhost:8080'));
